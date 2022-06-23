@@ -3,17 +3,17 @@
 Categorize caption into 5 categories of articles into 5 categories namely Sport, Tech, Business, Entertainment and politics. 
 
 
-### EDA 
-## 1) Data Loading
+## EDA 
+### 1) Data Loading
 
-## 2) Data Inspection
+### 2) Data Inspection
 
-## 3) Data Cleaning
+### 3) Data Cleaning
 
-## 4) Features Selection
+### 4) Features Selection
 Nothing to select
 
-## 5) Preprocessing
+### 5) Preprocessing
   
   1) Convert into lower case
   2) Tokenization
@@ -23,7 +23,7 @@ Nothing to select
   
   
 
-### Model Development
+## Model Development
 
 1) LSTM Bidirectional Embedding
 2) Stopping Callbacks 
@@ -31,7 +31,7 @@ Nothing to select
 4) Plot Visualisation
 
 
-### Model Evaluation / Analysis
+## Model Evaluation / Analysis
 
 1) accuracy score
 2) F1 score 
