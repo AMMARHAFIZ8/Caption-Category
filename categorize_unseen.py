@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 23 9:38:54 2022
 
@@ -28,6 +28,7 @@ from sklearn.metrics import accuracy_score
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.callbacks import EarlyStopping 
+from tensorflow.keras.layers import Bidirectional, Embedding
 
 #%%
 # EDA
@@ -87,7 +88,7 @@ for index,tex in enumerate(text):
 vocab_size = 10000
 oov_token = 'OOV'
 
-
+# Tokenization
 tokenizer = Tokenizer(num_words = vocab_size, oov_token=oov_token)
 
 
@@ -95,6 +96,7 @@ tokenizer.fit_on_texts(text) # to learn all of the words
 word_index = tokenizer.word_index
 print(word_index)
 
+# to convert into numbers
 train_sequences = tokenizer.texts_to_sequences(text) # converts into numbers
 
 #       3 Padding & truncating
@@ -128,7 +130,7 @@ X_test = np.expand_dims(X_test,axis=-1)
 
 #%% Model development
 
-from tensorflow.keras.layers import Bidirectional, Embedding
+#LSTM
 
 embedding_dim = 64
 
@@ -215,3 +217,15 @@ with open(OHE_PATH,'wb') as file:
 
 
 #%% Discussion/Reporting
+
+#   model accuracy and f1 gives 88.56% score
+#   the model accuracy and f1 score gives above 80%, the
+#   model is consider great and its learning from the training.  
+#   training graph shows an overfitting since the training accuracy is
+#   higher  than validation accuracy
+     
+#   This model seems not give any effect although Earlystopping with LSTM can 
+#   overcome overfitting.
+#   With suggestion to overcome overfitting can try other 
+#   architecture like BERT, transformer or GPT3 model.
+ 
