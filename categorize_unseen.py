@@ -218,14 +218,11 @@ with open(OHE_PATH,'wb') as file:
 
 #%% Discussion/Reporting
 
-#   model accuracy and f1 gives 88.56% score
-#   the model accuracy and f1 score gives above 80%, the
-#   model is consider great and its learning from the training.  
-#   training graph shows an overfitting since the training accuracy is
-#   higher  than validation accuracy
+
+# -The accuracy score and f1 of this model is 88.56% score
+# -Model is consider great and its learning from the training.  
+# -Training graph shows an overfitting since the training accuracy is higher  than validation accuracy
      
-#   This model seems not give any effect although Earlystopping with LSTM can 
-#   overcome overfitting.
-#   With suggestion to overcome overfitting can try other 
-#   architecture like BERT, transformer or GPT3 model.
+# -This model seems not give any effect although Earlystopping with LSTM can overcome overfitting.
+# -With suggestion to overcome overfitting can try other architecture like BERT, transformer or GPT3 model.
  
