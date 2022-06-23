@@ -74,4 +74,4 @@ architecture like BERT, transformer or GPT3 model.
 
 
 
-[Raw Data  ]([http://archive.ics.uci.edu/ml/datasets/Heart+Disease](https://raw.githubusercontent.com/susanli2016/PyCon-Canada-2019-NLP-Tutorial/master/bbc-text.csv))
+[Raw Data](http://archive.ics.uci.edu/ml/datasets/Heart+Disease](https://raw.githubusercontent.com/susanli2016/PyCon-Canada-2019-NLP-Tutorial/master/bbc-text.csv)
