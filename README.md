@@ -33,10 +33,11 @@ Nothing to select
 
 ## Model Evaluation / Analysis
 
-1) accuracy score
-2) F1 score 
+1) Accuracy score
+2) f1 score 
 
 f1, Accuracy score = 89%
+
 ![Alt text](https://github.com/AMMARHAFIZ8/Caption-Category/blob/main/acc.PNG)
 
 Model
