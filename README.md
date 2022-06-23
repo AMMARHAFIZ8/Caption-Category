@@ -4,16 +4,17 @@ Categorize caption into 5 categories of articles into 5 categories namely Sport,
 
 
 ### EDA 
-1) Data Loading
+## 1) Data Loading
 
-2) Data Inspection
+## 2) Data Inspection
 
-3) Data Cleaning
+## 3) Data Cleaning
 
-4) Features Selection
-#### Nothing to select
+## 4) Features Selection
+Nothing to select
 
-5) Preprocessing
+## 5) Preprocessing
+  
   1) Convert into lower case
   2) Tokenization
   3) Padding & truncating
