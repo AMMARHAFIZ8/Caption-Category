@@ -11,8 +11,10 @@ PATH = "https://raw.githubusercontent.com/susanli2016/PyCon-Canada-2019-NLP-Tuto
 #%%
 import pandas as pd
 import numpy as np
-from tensorflow.keras.preprocessing.text import Tokenizer
 import re
+import pickle
+import datetime
+from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
@@ -24,8 +26,8 @@ import os
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.metrics import accuracy_score
 from tensorflow.keras.utils import plot_model
-import pickle
-
+from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import EarlyStopping 
 
 #%%
 # EDA
@@ -53,7 +55,7 @@ df[df.duplicated()]
 
 # Step 3 Data Cleaning
 
-df = df.drop_duplicates()
+df = df.drop_duplicates() # drop duplicate
 
 # remove html tags
 # '<br /> dj9ejdwujdpi2wjdpwp <br />'.replace('<br />',' ')
@@ -64,10 +66,9 @@ category = df['category'].values #category = y
 
 for index,tex in enumerate(text):
     #remove html tags
-    # remove ? 
+    # remove ?  dont be greedy
     # zero or more occurance
     # any character except new line (/n)
-    
     text[index] = re.sub('<.*?>',' ',tex)
     
     #convert lower case
@@ -78,6 +79,7 @@ for index,tex in enumerate(text):
 
 # Step 4 Features Selection
 # Nothing to select
+
 
 # Step 5 Preprocessing:
 #       1 Convert into lower case
@@ -123,6 +125,7 @@ X_train, X_test, y_train, y_test = train_test_split(padded_text, category,
 X_train = np.expand_dims(X_train,axis=-1) # 2 to 3 dimensions
 X_test = np.expand_dims(X_test,axis=-1)
 
+
 #%% Model development
 
 from tensorflow.keras.layers import Bidirectional, Embedding
@@ -143,13 +146,27 @@ model.add(Dropout(0.3))
 model.add(Dense(5,'softmax'))
 model.summary()
 
-plot_model(model)
+
+plot_model(model,show_layer_names=(True),show_shapes=(True)) # plot flowchart of model layer
+
 model.compile(optimizer='adam',loss='categorical_crossentropy',metrics='acc')
 
-hist = model.fit(X_train, y_train, batch_size=128, epochs=100, validation_data=(X_test, y_test))
+# Stopping Callbacks 
+# Tensorboard
 
+early_stopping_callback = EarlyStopping(monitor='loss', patience=3)
 
+LOG_PATH = os.path.join(os.getcwd(),'Logs')
 
+log_dir = datetime.datetime.now()
+tensorboard_callback = TensorBoard(log_dir=LOG_PATH)
+
+hist = model.fit(X_train, y_train, batch_size=128, epochs=100,
+                 validation_data=(X_test, y_test),
+                 callbacks=[tensorboard_callback,early_stopping_callback])
+
+#Plot Visualisation
+#loss and accuracy for each training and validation
 hist.history.keys()
 
 plt.figure()
@@ -168,12 +185,12 @@ plt.show()
 y_true = y_test
 y_pred = model.predict(X_test)
 
-#%%
-y_true = np.argmax(y_true,axis=1)
-y_pred = np.argmax(y_pred,axis=1)
+
+y_true = np.argmax(y_true,axis=1) # to convert 0/1
+y_pred = np.argmax(y_pred,axis=1) # to convert 0/1
 
 
-#%%
+# show accuracy_score, accuracy_score, classification_report
 
 print(classification_report(y_true,y_pred))
 print(accuracy_score(y_true, y_pred))
